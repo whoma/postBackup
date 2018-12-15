@@ -28,7 +28,7 @@ const handle = (r) => {
   let sql = null;
   try {
     // 只采集需要的数据
-    sql = r.match(/INSERT INTO `table_name` VALUES (\((?:['|"][\s\S]*['|"],){3}(?:['|"][\s\S]*['|"]){1}\)[,]?)+/)[0];
+    sql = r.match(/INSERT INTO `TABLE_NAME` VALUES (\((?:['|"][\s\S]*['|"],){3}(?:['|"][\s\S]*['|"]){1}\)[,]?)+/)[0];
   } catch (e) {
     console.log('接收到的数据非法，暂停写入');
   }
@@ -36,7 +36,7 @@ const handle = (r) => {
   let hasSecure = sql != undefined;
   if (hasSecure) {
     // 先设置字符集，再删除旧的数据
-    let exeSql = 'set names Collation;\nLOCK TABLES `table_name` WRITE;\nDELETE FROM `table_name`;\n' + sql + ';\nUNLOCK TABLES;';
+    let exeSql = 'set names Collation;\nLOCK TABLES `TABLE_NAME` WRITE;\nDELETE FROM `TABLE_NAME`;\n' + sql + ';\nUNLOCK TABLES;';
     fs.writeFile('./back.sql', exeSql, (err) => {
       if (!err) {
         handleBack();

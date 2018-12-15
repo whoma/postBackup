@@ -18,7 +18,6 @@ def sendFile():
   except Exception:
     print '上传失败'
 
-
 def backup():
   backCount = 0
   while True:
@@ -30,5 +29,6 @@ def backup():
     sendFile()
     print '备份结束'
     time.sleep(5)
+
 
 backup()
