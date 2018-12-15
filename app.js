@@ -48,7 +48,7 @@ const handle = (r) => {
 const handleBack = () => {
   console.log('开始备份数据');
   exec(backupSh, (err, stdout, stderr) => {
-    if (!err && stderr != '') {
+    if (!err && stderr == '') {
       console.log('备份数据成功');
     } else {
       console.log('备份数据失败');
